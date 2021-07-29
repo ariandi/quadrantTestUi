@@ -24,6 +24,9 @@ import {FormsModule} from "@angular/forms";
 import {MatNativeDateModule, MatOptionModule} from '@angular/material/core';
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
+import { HomeComponent } from './components/home/home.component';
+import { AngularWebStorageModule } from 'angular-web-storage';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,7 @@ import {MatSelectModule} from "@angular/material/select";
     DashboardComponent,
     RegistrationComponentComponent,
     LoginComponentComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +58,8 @@ import {MatSelectModule} from "@angular/material/select";
     MatInputModule,
     MatSelectModule,
     MatOptionModule,
+    AngularWebStorageModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
