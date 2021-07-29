@@ -20,13 +20,14 @@ import { LoginComponentComponent } from './components/login-component/login-comp
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatRadioModule} from "@angular/material/radio";
 import {MatDatepickerModule} from "@angular/material/datepicker";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatNativeDateModule, MatOptionModule} from '@angular/material/core';
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
-import { HomeComponent } from './components/home/home.component';
+// import { HomeComponent } from './components/home/home.component';
 import { AngularWebStorageModule } from 'angular-web-storage';
 import { HttpClientModule } from '@angular/common/http';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { HttpClientModule } from '@angular/common/http';
     DashboardComponent,
     RegistrationComponentComponent,
     LoginComponentComponent,
-    HomeComponent,
+    // HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +60,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatSelectModule,
     MatOptionModule,
     AngularWebStorageModule,
-    HttpClientModule
+    HttpClientModule,
+    FlexLayoutModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

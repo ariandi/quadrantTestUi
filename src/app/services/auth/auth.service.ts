@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, from, Observable} from "rxjs";
+import {BehaviorSubject, from, Observable, throwError} from "rxjs";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import { LocalStorageService } from 'angular-web-storage';
@@ -29,14 +29,14 @@ export class AuthService {
     }
   }
 
-  login({email, password}: any): Observable<any> {
-    let credentials = {email, password};
-    return this.http.post(environment.apiUrl + 'login', credentials).pipe(
+  login({username, password}: any): Observable<any> {
+    let credentials = {username, password};
+    return this.http.post(environment.apiUrl + 'authenticate', credentials).pipe(
       timeout(5000),
       map((data: any) => data),
       switchMap(async data => {
-        // console.log(data);
-        await this.setUser(data);
+        console.log('data', data);
+        // await this.setUser(data);
         this.localStorage.set(environment.TOKEN_KEY, data.token);
         return from([data]);
       }),
@@ -53,9 +53,9 @@ export class AuthService {
   }
 
   // JSON "set" example
-  async setUser(user: string) {
-    this.localStorage.set('userData', user);
-  }
+  // async setUser(user: string) {
+  //   this.localStorage.set('userData', user);
+  // }
 
   logout(): void {
     this.isAuthenticated.next(false);
@@ -63,8 +63,9 @@ export class AuthService {
   }
 
   errorHandler(error: HttpErrorResponse) {
-    alert(error.message || 'server error.');
-    return Observable.throw(error.message || 'server error.');
+    console.log(error);
+    return throwError(error);
+    // return Observable.throw(error.message || 'server error.');
   }
 
 }

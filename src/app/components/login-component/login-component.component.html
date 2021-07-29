@@ -1,1 +1,29 @@
-<p>login-component works!</p>
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Log in</mat-card-title>
+    </mat-card-header>
+
+    <form class="example-form" (ngSubmit)="login()" [formGroup]="credentials">
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Username" formControlName="username">
+          <div *ngIf="(username.dirty || username.touched) && username.errors" class="errors">
+            <span *ngIf="username.errors?.required">Username is required</span>
+          </div>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Password" formControlName="password">
+          <div *ngIf="(password.dirty || password.touched) && password.errors" class="errors">
+            <span *ngIf="password.errors?.required">Password is required</span>
+            <span *ngIf="password.errors?.minlength">Password needs to be 6 characters</span>
+          </div>
+        </mat-form-field>
+      </mat-card-content>
+      <button mat-stroked-button color="accent" class="btn-block" [disabled]="!credentials.valid">Log in</button>
+    </form>
+  </mat-card>
+
+</div>
