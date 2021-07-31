@@ -28,7 +28,7 @@ export class LoginComponentComponent implements OnInit {
       async (res) => {
         let response = await res.toPromise();
         if (response.token) {
-          await this.router.navigateByUrl('/home', {replaceUrl: true});
+          await this.router.navigate(['/home', {}]);
         } else {
           alert(response.resultMsg);
         }

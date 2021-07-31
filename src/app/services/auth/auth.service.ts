@@ -14,7 +14,9 @@ export class AuthService {
   isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
   token = '';
 
-  constructor(private http: HttpClient, private localStorage: LocalStorageService,) {
+  constructor(private http: HttpClient,
+              private localStorage: LocalStorageService,
+              ) {
     this.loadToken().then();
   }
 
@@ -35,19 +37,22 @@ export class AuthService {
       timeout(5000),
       map((data: any) => data),
       switchMap(async data => {
-        console.log('data', data);
-        // await this.setUser(data);
         this.localStorage.set(environment.TOKEN_KEY, data.token);
-        return from([data]);
-      }),
-      tap(_ => {
-        // @ts-ignore
-        if (_.token){
+        // console.log(data);
+        if (data.token) {
           this.isAuthenticated.next(true);
-        }else{
+        } else {
           this.isAuthenticated.next(false);
         }
+        return from([data]);
       }),
+      // tap(resAuth => {
+      //   if (resAuth.token){
+      //     this.isAuthenticated.next(true);
+      //   }else{
+      //     this.isAuthenticated.next(false);
+      //   }
+      // }),
       catchError(this.errorHandler)
     );
   }
